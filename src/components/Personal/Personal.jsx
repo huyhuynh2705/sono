@@ -17,13 +17,17 @@ const Personal = () => {
 	const sumValue = (list, type) => {
 		if (list.length === 0) return 0;
 		if (type === 'dept') {
-			if (list.length === 1)
-				return list.reduce((deptor1, deptor2) => Number(deptor1.dept) + Number(deptor2.dept), { dept: 0 });
-			return list.reduce((deptor1, deptor2) => Number(deptor1.dept) + Number(deptor2.dept));
+			let total = 0;
+			for (let i of list) {
+				total += Number(i.dept);
+			}
+			return total;
 		} else if (type === 'pay') {
-			if (list.length === 1)
-				return list.reduce((deptor1, deptor2) => Number(deptor1.pay) + Number(deptor2.pay), { pay: 0 });
-			return list.reduce((deptor1, deptor2) => Number(deptor1.pay) + Number(deptor2.pay));
+			let total = 0;
+			for (let i of list) {
+				total += Number(i.pay);
+			}
+			return total;
 		}
 	};
 
