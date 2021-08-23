@@ -1,32 +1,52 @@
 import { StyleSheet } from 'react-native';
 
+import { themeDarkGray, themeWhite, themeRed, themeColor } from '../../helper/color';
+
 const styles = StyleSheet.create({
 	container: {
 		marginTop: -15,
 		marginBottom: 10,
-		marginHorizontal: 10,
-		backgroundColor: '#FFFFFF',
+		backgroundColor: themeWhite,
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		borderBottomLeftRadius: 5,
-		borderBottomLeftRadius: 5,
+		borderBottomRightRadius: 5,
 	},
 	payAll: {
-		backgroundColor: '#6fceba',
+		backgroundColor: themeColor,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center',
 		marginBottom: 10,
 	},
-	cancelPayAll: {
-		backgroundColor: '#f24343',
+	cancel: {
+		backgroundColor: themeRed,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center',
-		marginBottom: 10,
+		// marginBottom: 10,
+		width: '49%',
+		marginRight: '1%',
+	},
+	accept: {
+		backgroundColor: themeColor,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
+		padding: 10,
+		borderRadius: 5,
+		alignItems: 'center',
+		// marginBottom: 10,
+		width: '49%',
+		marginLeft: '1%',
 	},
 	payDivide: {
-		backgroundColor: '#6fceba',
+		backgroundColor: themeColor,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center',
@@ -36,9 +56,22 @@ const styles = StyleSheet.create({
 		height: 50,
 		width: '100%',
 		borderRadius: 5,
-		borderColor: '#C0C0C0',
+		borderColor: themeDarkGray,
 		borderWidth: 1,
 		marginBottom: 10,
+	},
+	delete: {
+		backgroundColor: themeRed,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
+		padding: 10,
+		borderRadius: 5,
+		alignItems: 'center',
+	},
+	buttonContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 	},
 });
 

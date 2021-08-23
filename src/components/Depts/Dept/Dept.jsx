@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 
@@ -6,14 +6,17 @@ import Pay from '../../Pay/Pay';
 
 import styles from './styles';
 
-const Dept = ({ data }) => {
+const Dept = ({ data, tab }) => {
 	const [isOpenDetail, setIsOpenDetail] = useState(false);
 
 	const date = moment(data.date).format('L');
-
 	const handleClick = (e) => {
 		setIsOpenDetail(!isOpenDetail);
 	};
+
+	useEffect(() => {
+		setIsOpenDetail(false);
+	}, [tab]);
 
 	return (
 		<View>
@@ -40,6 +43,7 @@ const Dept = ({ data }) => {
 				<Pay
 					style={{ zIndex: 2, position: 'relative' }}
 					data={data}
+					tab={tab}
 					isOpenDetail={isOpenDetail}
 					setIsOpenDetail={setIsOpenDetail}
 				/>

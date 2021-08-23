@@ -2,29 +2,47 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Keyboard, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { payAll, payAmount } from '../../action/index';
+import { payMyDeptAll, payMyDeptAmount, deleteMyDept } from '../../action/mydepts';
+import { payAll, payAmount, deleteDept } from '../../action/depts';
 import { TYPE_UNIT } from '../../helper/constant';
 
 import styles from './styles';
 
-const Pay = ({ data, setIsOpenDetail }) => {
+const Pay = ({ data, setIsOpenDetail, tab }) => {
 	const dispatch = useDispatch();
 	const [value, setValue] = useState('');
 	const [confirm, setConfirm] = useState(false);
 	const [confirmPayDivide, setConfirmPayDivide] = useState(false);
+	const [confirmDelete, setConfirmDelete] = useState(false);
 	const typeUnit = useSelector((state) => state.settings.typeUnit);
 
 	const handlePay = () => {
-		dispatch(payAll(data, data.value));
+		if (tab === 0) dispatch(payAll(data));
+		else if (tab === 1) dispatch(payMyDeptAll(data, data.value));
 		setConfirm(false);
+		setIsOpenDetail(false);
+		setConfirmDelete(false);
+	};
+
+	const handleDelete = () => {
+		if (tab === 0) dispatch(deleteDept(data));
+		else if (tab === 1) dispatch(deleteMyDept(data, data.value));
+		setConfirm(false);
+		setConfirmDelete(false);
 		setIsOpenDetail(false);
 	};
 
 	const handlePayDivide = () => {
 		Keyboard.dismiss();
-		if (value == data.value) dispatch(payAll(data, data.value));
-		else dispatch(payAmount(data, value));
+		if (tab === 0) {
+			if (value == data.value) dispatch(payAll(data));
+			else dispatch(payAmount(data, value));
+		} else if (tab === 1) {
+			if (value == data.value) dispatch(payMyDeptAll(data, data.value));
+			else dispatch(payMyDeptAmount(data, value));
+		}
 		setConfirmPayDivide(false);
+		setConfirmDelete(false);
 		setIsOpenDetail(false);
 	};
 
@@ -43,14 +61,16 @@ const Pay = ({ data, setIsOpenDetail }) => {
 					</TouchableOpacity>
 				</View>
 			) : (
-				<View style={{ marginTop: -10 }}>
+				<View style={{ marginTop: -10, marginBottom: 10 }}>
 					<Text style={{ textAlign: 'center', marginBottom: 5, fontWeight: 'bold' }}>Xác nhận trả hết?</Text>
-					<TouchableOpacity style={styles.payAll} onPress={() => handlePay()}>
-						<Text style={{ color: '#FFFFFF' }}>Đồng ý</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.cancelPayAll} onPress={() => setConfirm(false)}>
-						<Text style={{ color: '#FFFFFF' }}>Hủy</Text>
-					</TouchableOpacity>
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.cancel} onPress={() => setConfirm(false)}>
+							<Text style={{ color: '#FFFFFF' }}>Hủy</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={styles.accept} onPress={() => handlePay()}>
+							<Text style={{ color: '#FFFFFF' }}>Đồng ý</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
 			)}
 			{!confirmPayDivide ? (
@@ -80,18 +100,20 @@ const Pay = ({ data, setIsOpenDetail }) => {
 							<Text style={{ textAlign: 'center', marginBottom: 5, fontWeight: 'bold' }}>
 								Xác nhận trả {String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} đồng?
 							</Text>
-							<TouchableOpacity style={styles.payAll} onPress={() => handlePayDivide()}>
-								<Text style={{ color: '#FFFFFF' }}>Đồng ý</Text>
-							</TouchableOpacity>
-							<TouchableOpacity
-								style={styles.cancelPayAll}
-								onPress={() => {
-									setConfirmPayDivide(false);
-									setValue('');
-								}}
-							>
-								<Text style={{ color: '#FFFFFF' }}>Hủy</Text>
-							</TouchableOpacity>
+							<View style={styles.buttonContainer}>
+								<TouchableOpacity
+									style={styles.cancel}
+									onPress={() => {
+										setConfirmPayDivide(false);
+										setValue('');
+									}}
+								>
+									<Text style={{ color: '#FFFFFF' }}>Hủy</Text>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.accept} onPress={() => handlePayDivide()}>
+									<Text style={{ color: '#FFFFFF' }}>Đồng ý</Text>
+								</TouchableOpacity>
+							</View>
 						</View>
 					) : (
 						<View>
@@ -109,6 +131,36 @@ const Pay = ({ data, setIsOpenDetail }) => {
 							</TouchableOpacity>
 						</View>
 					)}
+				</View>
+			)}
+			{!confirmDelete ? (
+				<View>
+					{!confirm && !confirmPayDivide && (
+						<View style={{ marginTop: 10 }}>
+							<TouchableOpacity
+								style={styles.delete}
+								onPress={() => {
+									setConfirmDelete(true);
+									setConfirm(false);
+									setConfirmPayDivide(false);
+								}}
+							>
+								<Text style={{ color: '#FFFFFF' }}>Xóa</Text>
+							</TouchableOpacity>
+						</View>
+					)}
+				</View>
+			) : (
+				<View style={{ marginTop: 5 }}>
+					<Text style={{ textAlign: 'center', marginBottom: 5, fontWeight: 'bold' }}>Xác nhận xóa?</Text>
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.cancel} onPress={() => setConfirmDelete(false)}>
+							<Text style={{ color: '#FFFFFF' }}>Hủy</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={styles.accept} onPress={() => handleDelete()}>
+							<Text style={{ color: '#FFFFFF' }}>Đồng ý</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
 			)}
 		</View>

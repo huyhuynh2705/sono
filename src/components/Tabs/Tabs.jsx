@@ -15,6 +15,10 @@ const Tabs = ({ tab, setTab }) => {
 				<Text style={styles.text}>Bạn bè</Text>
 			</TouchableOpacity>
 			<TouchableOpacity style={tab === 2 ? styles.activeTab : styles.tab} onPress={() => setTab(2)}>
+				<Image style={{ height: 15, width: 15, marginBottom: 2 }} source={require('../../../assets/history.png')} />
+				<Text style={styles.text}>Lịch sử</Text>
+			</TouchableOpacity>
+			<TouchableOpacity style={tab === 3 ? styles.activeTab : styles.tab} onPress={() => setTab(3)}>
 				<Image style={{ height: 15, width: 17, marginBottom: 2 }} source={require('../../../assets/me.png')} />
 				<Text style={styles.text}>Cá nhân</Text>
 			</TouchableOpacity>

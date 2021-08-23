@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { themeWhite, themeRed, themeColor, themeDarkGray } from '../../../helper/color';
+
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
@@ -7,7 +9,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		marginTop: 10,
 		marginHorizontal: 10,
-		backgroundColor: '#FFFFFF',
+		backgroundColor: themeWhite,
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		borderRadius: 5,
@@ -30,28 +32,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		borderRadius: 5,
 	},
-	accept: {
-		backgroundColor: '#6fceba',
+	accept1: {
+		backgroundColor: themeColor,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center',
-		marginBottom: 10,
-	},
-	cancel: {
-		backgroundColor: '#f24343',
-		padding: 10,
-		borderRadius: 5,
-		alignItems: 'center',
-		marginBottom: 10,
-	},
-	container2: {
-		marginTop: -10,
-		marginBottom: 10,
-		marginHorizontal: 10,
-		backgroundColor: '#ffffff',
-		paddingHorizontal: 10,
-		borderBottomLeftRadius: 5,
-		borderBottomRightRadius: 5,
+		marginBottom: 5,
 	},
 	container3: {
 		marginTop: -10,
@@ -61,6 +47,40 @@ const styles = StyleSheet.create({
 		paddingBottom: 5,
 		borderBottomLeftRadius: 5,
 		borderBottomRightRadius: 5,
+	},
+	container2: {
+		marginTop: -10,
+		marginHorizontal: 10,
+		backgroundColor: themeWhite,
+		paddingHorizontal: 10,
+		paddingVertical: 10,
+		borderBottomLeftRadius: 5,
+		borderBottomRightRadius: 5,
+	},
+	cancel: {
+		backgroundColor: themeRed,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
+		padding: 10,
+		borderRadius: 5,
+		alignItems: 'center',
+		width: '49%',
+		marginRight: '1%',
+	},
+	accept: {
+		backgroundColor: themeColor,
+		borderColor: themeDarkGray,
+		borderWidth: 1,
+		padding: 10,
+		borderRadius: 5,
+		alignItems: 'center',
+		width: '49%',
+		marginLeft: '1%',
+	},
+	buttonContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 	},
 });
 

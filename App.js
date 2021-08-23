@@ -4,11 +4,11 @@ import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
 
 import Header from './src/components/Header/Header';
-import Depts from './src/components/Depts/Depts';
-import AddDept from './src/components/AddDept/AddDept';
 import Tabs from './src/components/Tabs/Tabs';
 import Deptors from './src/components/Deptors/Deptors';
 import Personal from './src/components/Personal/Personal';
+import HomeScreen from './src/components/HomeScreen/HomeScreen';
+import HistoryScreen from './src/components/HistoryScreen/HistoryScreen';
 
 import { store } from './src/helper/redux';
 
@@ -49,15 +49,12 @@ export default function App() {
 	const tabRender = (tab) => {
 		switch (tab) {
 			case 0:
-				return (
-					<View>
-						<AddDept />
-						<Depts />
-					</View>
-				);
+				return <HomeScreen />;
 			case 1:
 				return <Deptors />;
 			case 2:
+				return <HistoryScreen />;
+			case 3:
 				return <Personal />;
 			default:
 				return;
@@ -66,8 +63,8 @@ export default function App() {
 
 	return (
 		<Provider store={store}>
+			<StatusBar style='auto' />
 			<View style={styles.container}>
-				<StatusBar style='auto' />
 				<Header />
 				<ScrollView style={keyboardOpen ? {} : { marginBottom: 55 }}>{tabRender(tab)}</ScrollView>
 				<Animated.View

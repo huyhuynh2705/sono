@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { themeColor } from '../../helper/color';
+
 const styles = StyleSheet.create({
 	header: {
-		backgroundColor: '#6fceba',
+		backgroundColor: themeColor,
 		height: 100,
 		paddingHorizontal: 25,
 		flexDirection: 'row',

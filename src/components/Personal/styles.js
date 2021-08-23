@@ -1,14 +1,16 @@
 import { StyleSheet } from 'react-native';
 
+import { selectedThemeColor, themeWhite, themeRed, themeColor } from '../../helper/color';
+
 const styles = StyleSheet.create({
 	container: {
-		alignItems: 'center',
-		backgroundColor: '#FFFFFF',
+		backgroundColor: themeWhite,
 		marginVertical: 10,
 		marginHorizontal: 10,
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		borderRadius: 5,
+		alignItems: 'center',
 	},
 	text: {
 		fontSize: 14,
@@ -16,13 +18,12 @@ const styles = StyleSheet.create({
 	},
 	text2: {
 		fontSize: 16,
-		fontWeight: 'bold',
 		textAlign: 'center',
-		marginBottom: 10,
+		fontWeight: 'bold',
+		marginBottom: 5,
 	},
 	container2: {
-		alignItems: 'center',
-		backgroundColor: '#e55c5c',
+		backgroundColor: themeRed,
 		marginVertical: 10,
 		marginHorizontal: 10,
 		paddingHorizontal: 10,
@@ -33,24 +34,24 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		textAlign: 'center',
 		fontWeight: 'bold',
-		color: '#FFFFFF',
+		color: themeWhite,
 	},
 	accept: {
-		backgroundColor: '#f24343',
+		backgroundColor: themeRed,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center',
 		marginBottom: 10,
 	},
 	cancel: {
-		backgroundColor: '#6fceba',
+		backgroundColor: themeColor,
 		padding: 10,
 		borderRadius: 5,
 		alignItems: 'center',
 		marginBottom: 10,
 	},
 	container3: {
-		backgroundColor: '#FFFFFF',
+		backgroundColor: themeWhite,
 		marginVertical: 10,
 		marginHorizontal: 10,
 		paddingHorizontal: 10,
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
 	button1: {
 		borderTopLeftRadius: 5,
 		borderBottomLeftRadius: 5,
-		backgroundColor: '#6fceba',
+		backgroundColor: themeColor,
 		padding: 10,
 		alignItems: 'center',
 		flexGrow: 1,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
 	button1Active: {
 		borderTopLeftRadius: 5,
 		borderBottomLeftRadius: 5,
-		backgroundColor: '#6bb3a4',
+		backgroundColor: selectedThemeColor,
 		padding: 10,
 		alignItems: 'center',
 		flexGrow: 1,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
 	button2: {
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
-		backgroundColor: '#6fceba',
+		backgroundColor: themeColor,
 		padding: 10,
 		alignItems: 'center',
 		flexGrow: 1,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
 	button2Active: {
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
-		backgroundColor: '#6bb3a4',
+		backgroundColor: selectedThemeColor,
 		padding: 10,
 		alignItems: 'center',
 		flexGrow: 1,

@@ -5,7 +5,8 @@ const deptsReducer = (depts = [], action) => {
 		case 'ADD_DEPT':
 			return [action.payload, ...depts];
 		case 'DELETE_DEPT':
-			return depts.filter((dept) => dept.index !== action.payload);
+		case 'PAY_ALL':
+			return depts.filter((dept) => dept.index !== action.payload.index);
 		case 'PAY_AMOUNT':
 			return depts.map((dept) =>
 				dept.index !== action.payload.index ? dept : { ...dept, value: String(dept.value - action.payload.amount) }

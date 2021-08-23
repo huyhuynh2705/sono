@@ -2,39 +2,49 @@ import React, { useState } from 'react';
 import { Keyboard, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addDept } from '../../action/index';
+import { addMyDept } from '../../action/mydepts';
+import { addDept } from '../../action/depts';
 import { TYPE_UNIT } from '../../helper/constant';
 
 import styles from './styles';
 
 const initialState = { name: '', value: '', note: '', date: null };
 
-const AddDept = () => {
+const AddDept = ({ tab }) => {
 	const dispatch = useDispatch();
 	const [isOpen, setIsOpen] = useState(false);
 	const [form, setForm] = useState(initialState);
 	const recentDeptors = useSelector((state) => state.deptors);
 	const typeUnit = useSelector((state) => state.settings.typeUnit);
+
 	const handleAdd = () => {
 		Keyboard.dismiss();
-		if (form.name.trim() !== '' && form.value.trim() !== '' && !isNaN(form.value)) {
-			dispatch(addDept({ ...form, date: new Date(), index: Date.now() }));
+		if (
+			form.name.trim() !== '' &&
+			form.value.trim() !== '' &&
+			!isNaN(form.value) &&
+			Number(form.value) > 0 &&
+			isNaN(form.name.trim())
+		) {
+			const submitForm = { name: form.name.trim(), value: form.value.trim(), note: form.note.trim(), date: new Date() };
+			if (tab === 0) dispatch(addDept(submitForm));
+			else dispatch(addMyDept(submitForm));
 			setIsOpen(false);
 			setForm(initialState);
 		}
 	};
 
 	return isOpen ? (
-		<View style={{ marginBottom: 10 }}>
+		<View>
 			<View style={styles.container}>
 				<TextInput
 					value={form.name}
 					style={styles.input}
-					placeholder={'Người mượn'}
+					placeholder={tab === 0 ? 'Người mượn' : 'Người cho mượn'}
 					onChangeText={(text) => setForm({ ...form, name: text })}
 				/>
 			</View>
-			<ScrollView horizontal={true} style={styles.deptorContainer}>
+			<ScrollView horizontal={true}>
 				{recentDeptors?.map((deptor, index) => {
 					return (
 						<TouchableOpacity style={styles.deptor} key={index} onPress={() => setForm({ ...form, name: deptor.name })}>
@@ -60,28 +70,27 @@ const AddDept = () => {
 					onChangeText={(text) => setForm({ ...form, note: text })}
 				/>
 			</View>
-			<View style={styles.buttonContainer}>
-				<TouchableOpacity
-					onPress={() => {
-						setIsOpen(false);
-						setForm(initialState);
-					}}
-				>
-					<View style={styles.cancelButton}>
-						<Text style={styles.text}>Hủy</Text>
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => handleAdd()}>
-					<View style={styles.addButton}>
-						<Text style={styles.text}>Thêm</Text>
-					</View>
-				</TouchableOpacity>
+			<View style={{ marginTop: 10 }}>
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity
+						style={styles.cancel}
+						onPress={() => {
+							setIsOpen(false);
+							setForm(initialState);
+						}}
+					>
+						<Text style={{ color: '#FFFFFF' }}>Hủy</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.accept} onPress={() => handleAdd()}>
+						<Text style={{ color: '#FFFFFF' }}>Đồng ý</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</View>
 	) : (
 		<TouchableOpacity onPress={() => setIsOpen(true)}>
 			<View style={styles.addContainer}>
-				<Text style={styles.addDeptText}>Thêm</Text>
+				<Text style={styles.addDeptText}>{tab === 0 ? 'Cho mượn' : 'Đi mượn'}</Text>
 			</View>
 		</TouchableOpacity>
 	);

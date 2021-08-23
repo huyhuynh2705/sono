@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
 
+import { themeColor, selectedThemeColor, themeDarkGray } from '../../helper/color';
+
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		flexDirection: 'row',
 		flexWrap: 'wrap',
+		flexDirection: 'row',
 	},
 	tab: {
 		padding: 10,
-		backgroundColor: '#6fceba',
-		borderColor: '#C0C0C0',
+		backgroundColor: themeColor,
+		borderColor: themeDarkGray,
 		borderTopWidth: 1,
 		alignItems: 'center',
 		flexGrow: 1,
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
 	},
 	activeTab: {
 		padding: 10,
-		backgroundColor: '#6bb3a4',
+		backgroundColor: selectedThemeColor,
 		borderColor: '#C0C0C0',
 		borderTopWidth: 1,
 		alignItems: 'center',
